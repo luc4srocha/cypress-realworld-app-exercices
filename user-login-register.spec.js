@@ -1,10 +1,12 @@
-import LoginPage from '../../pages/loginPage'
-import DashboardPage from '../../pages/dashboardPage'
-import UserPage from '../../pages/userPage'
+import LoginPage from '../Exercices/pages/loginPage'
+import DashboardPage from '../Exercices/pages/dashboardPage'
+import UserPage from '../Exercices/pages/userPage'
+import TransactionPage from '../Exercices/pages/transactionPage'
 
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
 const userPage = new UserPage()
+const transactionPage = new TransactionPage()
 
 describe('Login RWA Tests', () => {
 
@@ -32,6 +34,15 @@ describe('Login RWA Tests', () => {
     userPage.accessUserPage()
     userPage.clickSignUpButton()
     userPage.checkIncompleteFields()
+
+  })
+
+
+    it('Sending money with sufficient funds', () => {
+    loginPage.accessLoginPage()
+    loginPage.loginWithAnyUser('Arvilla_Hegmann','s3cret')
+    transactionPage.clickTransactionButton()
+    transactionPage.sendMoneyToContact()
 
   })
 
