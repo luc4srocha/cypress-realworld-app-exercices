@@ -2,11 +2,13 @@ import LoginPage from '../Exercices/pages/loginPage'
 import DashboardPage from '../Exercices/pages/dashboardPage'
 import UserPage from '../Exercices/pages/userPage'
 import TransactionPage from '../Exercices/pages/transactionPage'
+import TransactionHistoryPage from '../Exercices/pages/transactionHistoryPage'
 
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
 const userPage = new UserPage()
 const transactionPage = new TransactionPage()
+const transactionHistoryPage = new TransactionHistoryPage()
 
 describe('Login RWA Tests', () => {
 
@@ -37,12 +39,26 @@ describe('Login RWA Tests', () => {
 
   })
 
-
     it('Sending money with sufficient funds', () => {
     loginPage.accessLoginPage()
     loginPage.loginWithAnyUser('Arvilla_Hegmann','s3cret')
     transactionPage.clickTransactionButton()
     transactionPage.sendMoneyToContact()
+
+  })
+
+    it('Checking Transaction History - Success', () => {
+    loginPage.accessLoginPage()
+    loginPage.loginWithAnyUser('Arvilla_Hegmann','s3cret')
+    transactionHistoryPage.checkTransactionHistory()
+
+  })
+
+    it('Checking Transaction History - No Transaction', () => {
+    userPage.accessUserPage()
+    userPage.registerWithAnyUser('Spider', 'Man', 'spiderman','maryjane','maryjane')
+    loginPage.loginWithAnyUser('spiderman','maryjane')
+    transactionHistoryPage.checkNoTransactionHistory()
 
   })
 
